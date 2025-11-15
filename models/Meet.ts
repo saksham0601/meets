@@ -63,4 +63,5 @@ const MeetSchema = new mongoose.Schema(
     }
 )
 
-export const Meet = mongoose.models.Meet || mongoose.model("Meet", MeetSchema)
+const Meet = mongoose.models.Meet || mongoose.model("Meet", MeetSchema)
+export default Meet

@@ -1,6 +1,8 @@
 import connectMongoDB from "@/lib/connection.ts"
-import { Meet } from "@/models/Meet"
+import Meet from "@/models/Meet"
 import Card from "@/components/ui/card.tsx"
+import NewMeet from "@/components/ui/new-meet.tsx"
+import { Button } from "@/components/ui/button"
 import {
   Table,
   TableBody,
@@ -98,6 +100,7 @@ export default async function Meets() {
                     </Dialog>
                 ))}
             </ul>
+            <NewMeet />
         </div>
     );
 }

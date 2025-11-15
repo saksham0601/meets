@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import Meet from "@/models/Meet"
-import connectMongoDB from "connection.ts"
+import connectMongoDB from "@/lib/connection.ts"
 
 export async function GET () {
     await connectMongoDB();
@@ -15,21 +15,20 @@ export async function GET () {
 }
 
 export async function POST(req: Request) {
-  await connectDB();
+    try {
+        await connectMongoDB();
 
-  try {
-    const data = await req.json();
-    const newMeet = new Meet(data);
-    await newMeet.save();
-    return NextResponse.json(newMeet, { status: 201 });
-  } catch (err) {
-    console.error(err);
-    return NextResponse.json({ error: "Failed to create meet" }, { status: 400 });
-  }
+        const data = await req.json();
+        const newMeet = await Meet.create(data);
+        return NextResponse.json(newMeet, { status: 201 });
+    } catch (err) {
+        console.error(err);
+        return NextResponse.json({ error: "Failed to create meet" }, { status: 400 });
+    }
 }
 
 export async function PUT(req: Request) {
-  await connectDB();
+  await connectMongoDB();
 
   try {
     const { id, ...updates } = await req.json();
@@ -44,7 +43,7 @@ export async function PUT(req: Request) {
 }
 
 export async function DELETE(req: Request) {
-  await connectDB();
+  await connectMongoDB();
 
   try {
     const { id } = await req.json();
