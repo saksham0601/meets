@@ -1,21 +1,21 @@
 import { NextResponse } from "next/server"
 import Team from "@/models/Team"
-import connectMongoDB from "connection.ts"
+import connectMongoDB from "@/lib/connection.ts"
 
-export async function GET () {
-    await connectMongoDB();
+export async function GET() {
+  await connectMongoDB();
 
-    try {
-        const meets = await Team.find().sort({ "date.start": 1 })
-        return NextResponse.json(meets);
-    } catch (e) {
-        console.error(e);
-        return NextResponse.json({ error: "Failed to fetch meets" }, { status: 500});
-    }
+  try {
+    const meets = await Team.find().sort({ "date.start": 1 })
+    return NextResponse.json(meets);
+  } catch (e) {
+    console.error(e);
+    return NextResponse.json({ error: "Failed to fetch meets" }, { status: 500 });
+  }
 }
 
 export async function POST(req: Request) {
-  await connectDB();
+  await connectMongoDB();
 
   try {
     const data = await req.json();
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
 }
 
 export async function PUT(req: Request) {
-  await connectDB();
+  await connectMongoDB();
 
   try {
     const { id, ...updates } = await req.json();
@@ -44,13 +44,13 @@ export async function PUT(req: Request) {
 }
 
 export async function DELETE(req: Request) {
-  await connectDB();
+  await connectMongoDB();
 
   try {
     const { id } = await req.json();
     const deleted = await Team.findByIdAndDelete(id);
     if (!deleted)
-        return NextResponse.json({ error: "Team not found" }, { status: 404 });
+      return NextResponse.json({ error: "Team not found" }, { status: 404 });
     return NextResponse.json({ meesage: "Team deleted successfully" });
   } catch (err) {
     console.error(err);
