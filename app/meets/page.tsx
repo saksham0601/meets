@@ -39,10 +39,18 @@ export default async function Meets() {
               <li className="p-4 border rounded-lg shadow-sm bg-card text-card-foreground">
                 <h2 className="text-xl font-semibold">{meet.name}</h2>
                 <p className="text-sm text-muted-foreground">
-                  📅 Start Date: {new Date(meet.date.start).toLocaleDateString()}
+                  📅 Start Date: {new Date(meet.date.start).toLocaleString("en-US", {
+                    month: "short",
+                    day: "2-digit",
+                    year: "numeric",
+                  })}
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  📅 End Date: {new Date(meet.date.end).toLocaleDateString()}
+                  📅 End Date: {new Date(meet.date.end).toLocaleString("en-US", {
+                    month: "short",
+                    day: "2-digit",
+                    year: "numeric",
+                  })}
                 </p>
                 {meet.location?.name && (
                   <p className="text-sm">📍 {meet.location.name}</p>
@@ -54,31 +62,42 @@ export default async function Meets() {
                 <DialogTitle>{meet.name}</DialogTitle>
               </Link>
               <div>
-                <p className="text-sm text-muted-foreground">
-                  📅 Start Date: {new Date(meet.date.start).toLocaleDateString()}
+                <p className="text-sm">
+                  📅 Start Date: {new Date(meet.date.start).toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "2-digit",
+                    year: "numeric",
+                  })}
                 </p>
-                <p className="text-sm text-muted-foreground">
-                  📅 End Date: {new Date(meet.date.end).toLocaleDateString()}
+                <p className="text-sm">
+                  📅 End Date: {new Date(meet.date.end).toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "2-digit",
+                    year: "numeric",
+                  })}
                 </p>
-                <p>{meet.location.name}</p>
-                <p>{meet.status}</p>
-                <Table>
+                <p>{meet.location.venueName}</p>
+                {meet.status === "planned" ? <p className="text-blue-600">Planned</p> : <div></div>}
+                {meet.status === "ongoing" ? <p className="text-green-600">Ongoing</p> : <div></div>}
+                {meet.status === "completed" ? <p className="text-gray-600">Completed</p> : <div></div>}
+                {meet.status === "cancelled" ? <p className="text-red-600">Cancelled</p> : <div></div>}
+                <Table className="mt-5">
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Name</TableHead>
-                      <TableHead>Role</TableHead>
+                      <TableHead className="border-r border-r-black w-20">Name</TableHead>
+                      <TableHead className="w-20">Role</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {meet.officials?.map((official) => (
                       <TableRow key={official.name}>
-                        <TableCell>{official.name}</TableCell>
+                        <TableCell className="border-r border-r-black">{official.name}</TableCell>
                         <TableCell>{official.role}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
                 </Table>
-                <hr className="my-6" />
+                <div className="my-6 border-b"></div>
                 <div className="justify-center text-center">Teams Leaderboard</div>
                 <Leaderboard id={meet._id.toString()} count={3} />
               </div>

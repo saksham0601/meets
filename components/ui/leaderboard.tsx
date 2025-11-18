@@ -17,7 +17,7 @@ interface Props {
 }
 
 export default async function Leaderboard({ id, count }: Props) {
-  count = 10
+  count = count ? count : 10
 
   await connectMongoDB();
   const points = await Race.aggregate([
@@ -70,17 +70,17 @@ export default async function Leaderboard({ id, count }: Props) {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>Position</TableHead>
-          <TableHead>Team</TableHead>
-          <TableHead>Points</TableHead>
+          <TableHead className="w-50 pl-5">Position</TableHead>
+          <TableHead className="w-50 pl-10">Team</TableHead>
+          <TableHead className="w-50 pl-10">Points</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {points.map((point, index) => (
           <TableRow key={point.teamId}>
-            <TableCell>{index + 1}</TableCell>
-            <TableCell>{point.teamName}</TableCell>
-            <TableCell>{point.totalPoints}</TableCell>
+            <TableCell className="pl-5">{index + 1}</TableCell>
+            <TableCell className="pl-10">{point.teamName}</TableCell>
+            <TableCell className="pl-10">{point.totalPoints}</TableCell>
           </TableRow>
         ))}
       </TableBody>
