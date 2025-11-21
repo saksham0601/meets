@@ -66,7 +66,7 @@ export default function NewMeet() {
       <DialogTrigger variant="default" size="icon" className="absolute -z-5 bottom-5 right-5 text-xl border bg-white text-black">
         +
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="dark:bg-gray-900/10 backdrop-blur-2xl">
         <DialogTitle>New Meet</DialogTitle>
         <form>
           <FieldGroup>

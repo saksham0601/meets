@@ -5,15 +5,12 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/ui/theme-changer"
 import {
   NavigationMenu,
-  // NavigationMenuContent,
-  // NavigationMenuIndicator,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  // NavigationMenuTrigger,
-  // NavigationMenuViewport,
 } from "@/components/ui/navigation-menu"
 import "./globals.css";
+import TeamSearchBar from "@/components/ui/search-bar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -28,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className="bg-white dark:bg-teal-500"
+        className="bg-cyan-100 dark:bg-teal-500"
       >
         <ThemeProvider
           attribute="class"
@@ -37,9 +34,9 @@ export default function RootLayout({
         >
           <div className="fixed inset-0 pointer-events-none -z-20" >
             <div className="h-full w-full" style={{ background: 'linear-gradient(180deg, rgba(255,255,255,0.0) 0%, rgba(3,4,94,0.8) 100%)' }} />
-            {/* <div className="h-full w-full" style={{ background: 'linear-gradient(180deg, rgba(255,255,255,0.0) 0%, rgba(131,201,244,1) 100%)' }} /> */}
           </div >
-          <div className="sticky top-0 flex justify-center items-center z-10 dark:bg-gray-900/10 bg-[rgba(219,233,238,1)] backdrop-blur-xl border-b border-b-white">
+          <TeamSearchBar />
+          <div className="sticky top-0 flex justify-center items-center z-10 dark:bg-gray-900/10 bg-cyan-200/10 backdrop-blur-xl border-b border-b-white">
             <Image src="/swim-icon.svg" alt="swimming" width={30} height={0} className="absolute top-1.5 left-2" />
             <p className="absolute top-2 left-11 text-xl" >MEETS LIVE</p>
             <NavigationMenu>

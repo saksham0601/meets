@@ -3,7 +3,6 @@ import Race from "@/models/Race"
 import {
   Table,
   TableBody,
-  // TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -63,7 +62,7 @@ export default async function Leaderboard({ id, count }: Props) {
       }
     },
 
-    { $sort: { totalPoints: -1 } }
+    { $sort: { totalPoints: -1, teamName: 1 } }
   ]).limit(count)
 
   return (

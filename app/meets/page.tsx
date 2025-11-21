@@ -1,12 +1,10 @@
 import connectMongoDB from "@/lib/connection.ts"
 import Meet from "@/models/Meet"
-import Card from "@/components/ui/card.tsx"
 import NewMeet from "@/components/ui/new-meet.tsx"
 import Link from "next/link"
 import {
   Table,
   TableBody,
-  // TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -14,11 +12,7 @@ import {
 } from "@/components/ui/table"
 import {
   Dialog,
-  // DialogClose,
   DialogContent,
-  // DialogDescription,
-  // DialogFooter,
-  // DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
@@ -36,7 +30,7 @@ export default async function Meets() {
         {meets.map((meet) => (
           <Dialog key={meet._id}>
             <DialogTrigger asChild>
-              <li className="p-4 backdrop-blur-lg bg-gray-900/10 dark:bg-gray-900/20 border border-white/20 rounded-lg shadow-sm text-card-foreground">
+              <li className="p-4 backdrop-blur-lg bg-white/10 dark:bg-gray-900/20 border border-white/20 rounded-lg shadow-sm text-card-foreground">
                 <h2 className="text-xl font-semibold">{meet.name}</h2>
                 <p className="text-sm text-foreground">
                   📅 Start Date: {new Date(meet.date.start).toLocaleString("en-US", {
@@ -57,7 +51,7 @@ export default async function Meets() {
                 )}
               </li>
             </DialogTrigger>
-            <DialogContent className="bg-black/0 backdrop-blur-3xl">
+            <DialogContent className="dark:bg-black/0 bg-cyan-100/40 backdrop-blur-3xl">
               <Link href={`/meets/${meet._id.toString()}`}>
                 <DialogTitle className="text-2xl font-bold">{meet.name}</DialogTitle>
               </Link>
@@ -77,10 +71,10 @@ export default async function Meets() {
                   })}
                 </p>
                 <p>{meet.location.venueName}</p>
-                {meet.status === "planned" ? <p className="text-blue-600">Planned</p> : <div></div>}
-                {meet.status === "ongoing" ? <p className="text-green-600">Ongoing</p> : <div></div>}
-                {meet.status === "completed" ? <p className="text-gray-400">Completed</p> : <div></div>}
-                {meet.status === "cancelled" ? <p className="text-red-600">Cancelled</p> : <div></div>}
+                {meet.status === "planned" ? <p className="text-blue-400">Planned</p> : <div></div>}
+                {meet.status === "ongoing" ? <p className="text-green-400">Active</p> : <div></div>}
+                {meet.status === "completed" ? <p className="dark:text-gray-400 text-gray-700">Completed</p> : <div></div>}
+                {meet.status === "cancelled" ? <p className="text-red-400">Cancelled</p> : <div></div>}
                 <div className="my-6 border-b"></div>
                 <div className="justify-center text-center text-2xl font-bold">Officials</div>
                 <Table className="">

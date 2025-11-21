@@ -7,7 +7,6 @@ import Image from "next/image"
 import {
   Table,
   TableBody,
-  // TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -52,7 +51,7 @@ export default async function MeetPage(props: { params: Promise<{ id: string }> 
               <TableHead className="pl-5 hover:rounded-2xl">Race</TableHead>
               <TableHead>Category</TableHead>
               <TableHead>Status</TableHead>
-              <TableHead className="w-100">Start Time</TableHead>
+              <TableHead className="">Start Time</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -60,16 +59,13 @@ export default async function MeetPage(props: { params: Promise<{ id: string }> 
               <TableRow key={race._id}>
                 <Link href={`/meets/${id}/race/${race._id.toString()}`} className="contents">
                   <TableCell className="pl-5">{race.event.stroke} {race.event.distance}m</TableCell>
-                  <TableCell>{race.event.category}</TableCell>
-                  <TableCell>{race.status}</TableCell>
+                  <TableCell className="">{race.event.category}</TableCell>
+                  <TableCell className="">{race.status}</TableCell>
                   <TableCell className="">{race.heats[0].startTime.toLocaleString('en-US', {
-                    weekday: 'long',
-                    year: 'numeric',
-                    month: 'long',
+                    month: 'short',
                     day: 'numeric',
                     hour: '2-digit',
                     minute: '2-digit',
-                    second: '2-digit'
                   })}</TableCell>
                 </Link>
               </TableRow>
