@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link"
+import Image from "next/image"
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/ui/theme-changer"
 import {
@@ -27,44 +28,45 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className="bg-background"
+        className="bg-white dark:bg-teal-500"
       >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
         >
-          <div className="flex justify-center items-center bg-white/10">
+          <div className="fixed inset-0 pointer-events-none -z-20" >
+            <div className="h-full w-full" style={{ background: 'linear-gradient(180deg, rgba(255,255,255,0.0) 0%, rgba(3,4,94,0.8) 100%)' }} />
+            {/* <div className="h-full w-full" style={{ background: 'linear-gradient(180deg, rgba(255,255,255,0.0) 0%, rgba(131,201,244,1) 100%)' }} /> */}
+          </div >
+          <div className="sticky top-0 flex justify-center items-center z-10 dark:bg-gray-900/10 bg-[rgba(219,233,238,1)] backdrop-blur-xl border-b border-b-white">
+            <Image src="/swim-icon.svg" alt="swimming" width={30} height={0} className="absolute top-1.5 left-2" />
+            <p className="absolute top-2 left-11 text-xl" >MEETS LIVE</p>
             <NavigationMenu>
               <NavigationMenuList className="flex-wrap">
                 <NavigationMenuItem>
-                  <NavigationMenuLink asChild className="text-xl">
+                  <NavigationMenuLink asChild className="text-xl hover:bg-white/10 focus:bg-white/10">
                     <Link href="/">Home</Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <NavigationMenuLink asChild className="text-xl">
+                  <NavigationMenuLink asChild className="text-xl hover:bg-white/10 focus:bg-white/10">
                     <Link href="/meets">Meets</Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <NavigationMenuLink asChild className="text-xl">
+                  <NavigationMenuLink asChild className="text-xl hover:bg-white/10 focus:bg-white/10">
                     <Link href="/teams">Teams</Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <NavigationMenuLink asChild className="text-xl">
+                  <NavigationMenuLink asChild className="text-xl hover:bg-white/10 focus:bg-white/10">
                     <Link href="swimmers">Swimmers</Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
             <ThemeToggle />
-          </div>
-          <div className="fixed bottom-0 left-0 w-full overflow-hidden -z-10">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-              <path fill="#0099ff" fillOpacity="1" d="M0,128L60,138.7C120,149,240,171,360,186.7C480,203,600,213,720,197.3C840,181,960,139,1080,138.7C1200,139,1320,181,1380,202.7L1440,224L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
-            </svg>
           </div>
         </ThemeProvider>
         {children}

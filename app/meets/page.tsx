@@ -36,16 +36,16 @@ export default async function Meets() {
         {meets.map((meet) => (
           <Dialog key={meet._id}>
             <DialogTrigger asChild>
-              <li className="p-4 border rounded-lg shadow-sm bg-card text-card-foreground">
+              <li className="p-4 backdrop-blur-lg bg-gray-900/10 dark:bg-gray-900/20 border border-white/20 rounded-lg shadow-sm text-card-foreground">
                 <h2 className="text-xl font-semibold">{meet.name}</h2>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-foreground">
                   📅 Start Date: {new Date(meet.date.start).toLocaleString("en-US", {
                     month: "short",
                     day: "2-digit",
                     year: "numeric",
                   })}
                 </p>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-foreground">
                   📅 End Date: {new Date(meet.date.end).toLocaleString("en-US", {
                     month: "short",
                     day: "2-digit",
@@ -57,9 +57,9 @@ export default async function Meets() {
                 )}
               </li>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="bg-black/0 backdrop-blur-3xl">
               <Link href={`/meets/${meet._id.toString()}`}>
-                <DialogTitle>{meet.name}</DialogTitle>
+                <DialogTitle className="text-2xl font-bold">{meet.name}</DialogTitle>
               </Link>
               <div>
                 <p className="text-sm">
@@ -79,26 +79,28 @@ export default async function Meets() {
                 <p>{meet.location.venueName}</p>
                 {meet.status === "planned" ? <p className="text-blue-600">Planned</p> : <div></div>}
                 {meet.status === "ongoing" ? <p className="text-green-600">Ongoing</p> : <div></div>}
-                {meet.status === "completed" ? <p className="text-gray-600">Completed</p> : <div></div>}
+                {meet.status === "completed" ? <p className="text-gray-400">Completed</p> : <div></div>}
                 {meet.status === "cancelled" ? <p className="text-red-600">Cancelled</p> : <div></div>}
-                <Table className="mt-5">
+                <div className="my-6 border-b"></div>
+                <div className="justify-center text-center text-2xl font-bold">Officials</div>
+                <Table className="">
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="border-r border-r-black w-20">Name</TableHead>
+                      <TableHead className="w-20">Name</TableHead>
                       <TableHead className="w-20">Role</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {meet.officials?.map((official) => (
                       <TableRow key={official.name}>
-                        <TableCell className="border-r border-r-black">{official.name}</TableCell>
+                        <TableCell>{official.name}</TableCell>
                         <TableCell>{official.role}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
                 </Table>
                 <div className="my-6 border-b"></div>
-                <div className="justify-center text-center">Teams Leaderboard</div>
+                <div className="justify-center text-center text-2xl font-bold">Teams Leaderboard</div>
                 <Leaderboard id={meet._id.toString()} count={3} />
               </div>
             </DialogContent>
