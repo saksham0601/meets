@@ -11,7 +11,10 @@ const RaceSchema = new mongoose.Schema(
       gender: { type: String, enum: ["male", "female", "open"], required: true },
       stroke: { type: String, enum: ["Free", "Back", "Breast", "Fly", "IM"], required: true },
       distance: { type: Number, enum: [25, 50, 100, 150, 200, 400, 500, 800, 1000, 1500, 1650], required: true },
-      category: { type: String, enum: ["6&U", "7–8", "8&U", "9–10", "10&U", "11–12", "13–14", "14&U", "15–17", "15–18", "18&U", "Open"], required: true },
+      category: {
+        type: String,
+        enum: ["6&U", "7-8", "8&U", "9-10", "10&U", "11-12", "13-14", "14&U", "15-17", "15-18", "18&U", "Open"]
+      }
     },
     heats: [
       {

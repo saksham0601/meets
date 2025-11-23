@@ -12,6 +12,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs"
 
 export default async function MeetPage(props: { params: Promise<{ id: string }> }) {
   const { id } = await props.params;
@@ -41,9 +47,22 @@ export default async function MeetPage(props: { params: Promise<{ id: string }> 
           })}</p>
         </div>
       </div>
-      <div className="backdrop-blur-lg bg-white/10 dark:bg-gray-900/10 border border-white/20 mt-10 ml-10 mr-10 rounded-2xl">
-        <Leaderboard id={id} count={10} />
-      </div>
+      <Tabs defaultValue="teams">
+        <TabsList className="mx-auto mt-10 -mb-10 backdrop-blur-lg bg-white/10 dark:bg-gray-900/10 border border-white/20 rounded-lg">
+          <TabsTrigger value="teams">Teams</TabsTrigger>
+          <TabsTrigger value="swimmers">Swimmers</TabsTrigger>
+        </TabsList>
+        <TabsContent value="teams">
+          <div className="backdrop-blur-lg bg-white/10 dark:bg-gray-900/10 border border-white/20 mt-10 ml-10 mr-10 rounded-2xl">
+            <Leaderboard id={id} count={10} type="teams" />
+          </div>
+        </TabsContent>
+        <TabsContent value="swimmers">
+          <div className="backdrop-blur-lg bg-white/10 dark:bg-gray-900/10 border border-white/20 mt-10 ml-10 mr-10 rounded-2xl">
+            <Leaderboard id={id} count={10} type="swimmer" />
+          </div>
+        </TabsContent>
+      </Tabs>
       <div className="backdrop-blur-lg bg-white/10 dark:bg-gray-900/10 border border-white/20 mt-10 ml-10 m-10 rounded-2xl">
         <Table>
           <TableHeader>

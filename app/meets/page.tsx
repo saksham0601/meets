@@ -26,7 +26,7 @@ export default async function Meets() {
 
   return (
     <div>
-      <ul className="relative top-5 space-y-4 p-5">
+      <ul className="relative space-y-4 p-5">
         {meets.map((meet) => (
           <Dialog key={meet._id}>
             <DialogTrigger asChild>
