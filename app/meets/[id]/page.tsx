@@ -78,7 +78,7 @@ export default async function MeetPage(props: { params: Promise<{ id: string }> 
               <TableRow key={race._id}>
                 <Link href={`/meets/${id}/race/${race._id.toString()}`} className="contents">
                   <TableCell className="pl-5">{race.event.stroke} {race.event.distance}m</TableCell>
-                  <TableCell className="">{race.event.category}</TableCell>
+                  <TableCell className="">{race.event.ageCategory}</TableCell>
                   <TableCell className="">{race.status}</TableCell>
                   <TableCell className="">{race.heats[0].startTime.toLocaleString('en-US', {
                     month: 'short',

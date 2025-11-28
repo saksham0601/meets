@@ -14,7 +14,7 @@ export default async function RacePage(props: { params: Promise<{ raceId: string
 
   await connectMongoDB()
   const race = await Race.findById(raceId).lean()
-  const record = await Record.findOne({ "recordType": "WR", "event.stroke": race.event.stroke, "event.category": race.event.category.replace(/–/g, "-"), "event.distance": race.event.distance, "event.gender": race.event.gender }).lean()
+  const record = await Record.findOne({ "recordType": "WR", "event.stroke": race.event.stroke, "event.distance": race.event.distance, "event.gender": race.event.gender, "achievedOn": { $lte: new Date() } }).lean()
   const swimmers = await Race.aggregate([
     { $match: { _id: new mongoose.Types.ObjectId(raceId) } },
 

@@ -10,25 +10,24 @@ const TeamSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    coach: {
+    headCoach: {
       type: String,
       required: true
     },
-    swimmers: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Swimmer"
-      }
-    ],
-    seasonRank: [
-      {
-        season: { type: String, required: true },
-        rank: { type: Number, required: true }
-      }
-    ],
+    assistantHeadCoach: {
+      type: String,
+    },
+    foundedYear: {
+      type: Number,
+      required: true
+    },
+    description: {
+      type: String,
+    },
     eventPoints: [
       {
-        meedId: { type: mongoose.Schema.Types.ObjectId, required: true },
+        meetId: { type: mongoose.Schema.Types.ObjectId, ref: "Meet", required: true },
+        rank: { type: Number },
         points: { type: Number, required: true, default: 0 }
       }
     ]

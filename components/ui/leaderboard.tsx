@@ -100,8 +100,6 @@ export default async function Leaderboard({ id, count, type }: Props) {
       { $sort: { totalPoints: -1, teamName: 1 } }
     ]).limit(count)
 
-  console.log(points)
-
   return (
     <Table>
       <TableHeader>

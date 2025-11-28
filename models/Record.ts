@@ -4,7 +4,7 @@ const RecordSchema = new mongoose.Schema(
   {
     recordType: {
       type: String,
-      enum: ["PB", "WR", "PR", "MR"],
+      enum: ["PB", "WR", "PR"],
       required: true
     },
 
@@ -14,20 +14,24 @@ const RecordSchema = new mongoose.Schema(
       required: true
     },
 
+    swimmerName: {
+      type: String,
+      required: true
+    },
+
     event: {
-      stroke: { type: String, enum: ["Free", "Back", "Breast", "Fly", "IM"], required: true },
-      distance: { type: Number, enum: [25, 50, 100, 150, 200, 400, 800, 1500, 1650], required: true },
       gender: { type: String, enum: ["male", "female"], required: true },
-      category: {
+      stroke: { type: String, enum: ["Freestyle", "Backstroke", "Breaststroke", "Butterfly", "Medley"], required: true },
+      distance: { type: Number, enum: [50, 100, 150, 200, 400, 500, 800, 1000, 1500, 1650], required: true },
+      ageCategory: {
         type: String,
-        enum: ["6&U", "7–8", "8&U", "9–10", "10&U", "11–12", "13-14", "14&U", "15-17", "15-18", "18&U", "Open"],
-        required: true
+        enum: ["10&U", "11-12", "13-14", "15-16", "17-19", "20&O"]
       }
     },
 
     time: { type: Number, required: true },
 
-    achievedAt: { type: Date, required: true },
+    achievedOn: { type: Date, required: true },
     meetId: { type: mongoose.Types.ObjectId, ref: "Meet" },
     raceId: { type: mongoose.Types.ObjectId, ref: "Race" },
   }

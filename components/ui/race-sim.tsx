@@ -19,12 +19,13 @@ export default function RaceSim({ swimmerId, raceId }: Props) {
         `/api/sensors/${raceId.toString()}/${swimmerId.toString()}`
       );
       const data = await res.json();
+      console.log(data)
 
-      if (data[count]?.distance) {
-        setDistance(data[count].distance);
+      if (data[count]?.distances) {
+        setDistance(data[count].distances[data[count].distances.length - 1]);
         setCount(count + 1)
 
-        if (data[count].distance >= 50) {
+        if (count > data.length) {
           setStop(true);
         }
       }
@@ -34,13 +35,28 @@ export default function RaceSim({ swimmerId, raceId }: Props) {
   }, [stop, count, raceId, swimmerId]);
 
   function raceSim(distance: number) {
-    const string = "--------------------------------------------------"
-    return string.substring(0, distance) + "◦" + string.substring(distance + 1)
+    const lane = "--------------------------------------------------";
+    const pos = Math.floor(distance % 50);
+    const back = Math.floor(distance / 50) % 2 === 1;
+
+    let index = pos;
+
+    if (back) {
+      index = 49 - pos;
+    }
+
+    index = Math.max(0, Math.min(49, index));
+
+    return (
+      lane.substring(0, index) +
+      "◦" +
+      lane.substring(index + 1)
+    );
   }
 
   return (
     <div>
-      <div className="text-center bg-white/10 dark:bg-gray-900/10 border border-white/20 w-[50vw] text-lg" >{raceSim(distance)}</div >
+      <div className="text-center bg-white/10 dark:bg-gray-900/10 border border-white/20 w-110 text-lg" >{raceSim(distance)}</div >
     </div>
   );
 }

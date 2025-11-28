@@ -6,19 +6,22 @@ const MeetSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    description: {
+      type: String
+    },
     location: {
       type: { type: String, enum: ["Point"], required: true },
       coordinates: { type: [Number], required: true },
-      venueName: {
-        type: String,
-        required: true
-      },
-      city: {
-        type: String,
-      },
-      country: {
-        type: String,
-      },
+    },
+    venueName: {
+      type: String,
+      required: true
+    },
+    city: {
+      type: String,
+    },
+    country: {
+      type: String,
     },
     date: {
       start: {

@@ -12,7 +12,19 @@ const SensorSchema = new mongoose.Schema(
       ref: "Swimmer",
       required: true
     },
-    distance: {
+    distances: [
+      {
+        type: Number,
+        required: true
+      }
+    ],
+    frames: [
+      {
+        type: Number,
+        required: true
+      }
+    ],
+    dataNumber: {
       type: Number,
       required: true
     }

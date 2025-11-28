@@ -8,26 +8,35 @@ const SwimmerSchema = new mongoose.Schema(
     },
     dob: {
       type: Date,
+      required: true
     },
     gender: {
       type: String,
       enum: ["male", "female"],
+      required: true
+    },
+    status: {
+      type: String,
+      enum: ["active", "inactive"],
+      required: true,
+      default: "active"
     },
     teamId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Team",
     },
-    eventsEntered: {
-      meetId: { type: mongoose.Schema.Types.ObjectId, ref: "Meet" },
-      raceId: { type: mongoose.Schema.Types.ObjectId, ref: "Race" },
-    },
     personalBests: [
       {
+        _id: false,
         stroke: { type: String, enum: ["Free", "Back", "Breast", "Fly", "IM"], required: true },
         distance: { type: Number, enum: [25, 50, 100, 150, 200, 400, 800, 1500, 1650], required: true },
+        ageCategory: {
+          type: String,
+          enum: ["10&U", "11-12", "13-14", "15-16", "17-19", "20&O"]
+        },
         time: { type: Number, required: true },
-        achievedAt: { type: mongoose.Schema.Types.ObjectId, ref: "Meet" },
-        raceId: { type: mongoose.Schema.Types.ObjectId, ref: "Race" }
+        achievedOn: { type: Date, required: true },
+        recordId: { type: mongoose.Schema.Types.ObjectId, ref: "Record" }
       }
     ]
   }

@@ -14,7 +14,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ raceId, 
     raceId: rId,
     swimmerId: sId,
   })
-    .sort({ dataNumber: 1 }) // or dataNumber
+    // .sort({ dataNumber: 1 })
     .lean();
 
   return Response.json(next || {});
